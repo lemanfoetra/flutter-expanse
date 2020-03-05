@@ -1,7 +1,6 @@
 import './widgets/transaction.dart';
 import 'package:flutter/material.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -18,32 +17,24 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class Home extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Expanses Widget') ),
-      body: Column(
+      appBar: AppBar(title: Text('Expanses Widget')),
+      body: SingleChildScrollView(
+        child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-
               Container(
                 width: double.infinity,
                 child: Card(
                   child: Text('Chart'),
                 ),
               ),
-
               Transaction(),
-              
-            ]
-          )
-
+            ]),
+      ),
     );
   }
 }
-
-
