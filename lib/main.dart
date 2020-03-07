@@ -1,4 +1,7 @@
-import './widgets/transaction.dart';
+import './widgets/transaction_list.dart';
+
+import './models/transaction_model.dart';
+import './widgets/add_transaction.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -17,7 +20,46 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final List<TransactionModel> transactions = [
+    TransactionModel(
+        id: 't1', title: 'Sepatu Baru', amount: 15.45, date: DateTime.now()),
+    TransactionModel(
+        id: 't2', title: 'Kemeja Batik', amount: 10.12, date: DateTime.now()),
+  ];
+
+  void _addTransaction(String titleAdd, double amountAdd) {
+    final addTrx = TransactionModel(
+        id: DateTime.now().toString(),
+        title: titleAdd,
+        amount: amountAdd,
+        date: DateTime.now());
+
+    setState(() {
+      transactions.add(addTrx);
+    });
+  }
+
+  void modalAddTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          child: AddTransaction(
+            addFunction: _addTransaction,
+          ),
+          onTap: (){},
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +68,9 @@ class Home extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () {
+              modalAddTransaction(context);
+            },
           ),
         ],
       ),
@@ -40,7 +84,7 @@ class Home extends StatelessWidget {
                 child: Text('Chart'),
               ),
             ),
-            Transaction(),
+            TransactionList(transactions: transactions),
           ],
         ),
       ),
