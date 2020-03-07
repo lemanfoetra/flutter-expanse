@@ -21,7 +21,12 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Expanses Widget')),
+      appBar: AppBar(
+        title: Text('Expanses Widget'),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.add), onPressed: () {},),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
