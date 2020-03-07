@@ -24,7 +24,10 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: Text('Expanses Widget'),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.add), onPressed: () {},),
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -40,6 +43,10 @@ class Home extends StatelessWidget {
             Transaction(),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
       ),
     );
   }
