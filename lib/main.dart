@@ -22,18 +22,17 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Expanses Widget')),
-      body: SingleChildScrollView(
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
-                width: double.infinity,
-                child: Card(
-                  child: Text('Chart'),
-                ),
-              ),
-              Transaction(),
-            ]),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            child: Card(
+              child: Text('Chart'),
+            ),
+          ),
+          Transaction(),
+        ],
       ),
     );
   }
