@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 
-class AddTransaction extends StatelessWidget {
-
-
+// di ubah ke statefull karena agar 
+class AddTransaction extends StatefulWidget {
   final Function addFunction;
-
-  final title   = TextEditingController();
-  final amount  = TextEditingController();
 
   AddTransaction({this.addFunction});
 
+  @override
+  _AddTransactionState createState() => _AddTransactionState();
+}
+
+class _AddTransactionState extends State<AddTransaction> {
+  final title = TextEditingController();
+
+  final amount = TextEditingController();
+
   void onSubmit() {
-    if(amount.text.isEmpty || double.parse(amount.text) <= 0){
-      return ;
+    if (amount.text.isEmpty || double.parse(amount.text) <= 0) {
+      return;
     }
-    addFunction(title.text,double.parse(amount.text));
+    // Dengan widget, kita bisa mengambil properti parrent class ke child class
+    widget.addFunction(title.text, double.parse(amount.text));
+
+    Navigator.of(context).pop();
   }
 
   @override
@@ -29,7 +37,7 @@ class AddTransaction extends StatelessWidget {
               decoration: InputDecoration(labelText: 'Title'),
               controller: title,
               keyboardType: TextInputType.text,
-              onSubmitted: (str) => onSubmit ,
+              onSubmitted: (str) => onSubmit,
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
