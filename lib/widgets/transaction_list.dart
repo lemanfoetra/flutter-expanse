@@ -24,7 +24,7 @@ class TransactionList extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).primaryColor,
-                      fontSize: 20,
+                      fontFamily: 'Quicksand',
                     ),
                   ),
                   decoration: BoxDecoration(
