@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
+        accentColor: Colors.purple,
       ),
       home: Home(),
     );
@@ -53,7 +54,7 @@ class _HomeState extends State<Home> {
           child: AddTransaction(
             addFunction: _addTransaction,
           ),
-          onTap: (){},
+          onTap: () {},
           behavior: HitTestBehavior.opaque,
         );
       },
