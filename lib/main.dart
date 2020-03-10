@@ -37,10 +37,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final List<TransactionModel> transactions = [
-    TransactionModel(
-        id: 't1', title: 'Sepatu Baru', amount: 15.45, date: DateTime.now()),
-    TransactionModel(
-        id: 't2', title: 'Kemeja Batik', amount: 10.12, date: DateTime.now()),
+    // TransactionModel(
+    //     id: 't1', title: 'Sepatu Baru', amount: 15.45, date: DateTime.now()),
+    // TransactionModel(
+    //     id: 't2', title: 'Kemeja Batik', amount: 10.12, date: DateTime.now()),
   ];
 
   void _addTransaction(String titleAdd, double amountAdd) {
@@ -101,7 +101,21 @@ class _HomeState extends State<Home> {
                 child: Text('Chart'),
               ),
             ),
-            TransactionList(transactions: transactions),
+            transactions.isEmpty
+                ? Column(
+                    children: <Widget>[
+                      Text('No Data', style: Theme.of(context).textTheme.title ,),
+                      SizedBox(height: 20,),
+                      Container(
+                        width: 100,
+                        child: Image.asset(
+                          'assets/images/waiting.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
+                  )
+                : TransactionList(transactions: transactions),
           ],
         ),
       ),
