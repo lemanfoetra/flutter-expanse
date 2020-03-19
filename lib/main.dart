@@ -1,3 +1,5 @@
+import './widgets/chart.dart';
+
 import './widgets/transaction_list.dart';
 
 import './models/transaction_model.dart';
@@ -42,6 +44,15 @@ class _HomeState extends State<Home> {
     // TransactionModel(
     //     id: 't2', title: 'Kemeja Batik', amount: 10.12, date: DateTime.now()),
   ];
+
+
+  List<TransactionModel> get _recentTransaction {
+    return transactions.where((trx){
+
+      // Hanya menghitung list yang waktu di buatnya dari 7 hari yang lalu
+      return trx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   void _addTransaction(String titleAdd, double amountAdd) {
     final addTrx = TransactionModel(
@@ -97,9 +108,7 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             Container(
               width: double.infinity,
-              child: Card(
-                child: Text('Chart'),
-              ),
+              child: Chart(_recentTransaction),
             ),
             transactions.isEmpty
                 ? Column(
