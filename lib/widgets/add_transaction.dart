@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// di ubah ke statefull karena agar 
+// di ubah ke statefull karena agar
 class AddTransaction extends StatefulWidget {
   final Function addFunction;
 
@@ -44,10 +44,28 @@ class _AddTransactionState extends State<AddTransaction> {
               controller: amount,
               keyboardType: TextInputType.number,
             ),
-            FlatButton(
+            Container(
+              padding: EdgeInsets.only(top: 20),
+              child: Row(
+                children: <Widget>[
+                  Text('Tidak tanggal dipilih'),
+                  FlatButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Pilih Tanggal',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            RaisedButton(
               onPressed: () => onSubmit(),
               child: Text('Save'),
-              textColor: Colors.teal,
+              color: Theme.of(context).primaryColor,
+              textColor: Colors.white,
             ),
           ],
         ),

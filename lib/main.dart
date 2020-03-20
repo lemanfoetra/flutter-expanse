@@ -24,6 +24,9 @@ class MyApp extends StatelessWidget {
                     fontFamily: 'OpenSans',
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
+                button: TextStyle(
+                  color: Colors.white,
+                ),
               ),
         ),
       ),
@@ -45,10 +48,8 @@ class _HomeState extends State<Home> {
     //     id: 't2', title: 'Kemeja Batik', amount: 10.12, date: DateTime.now()),
   ];
 
-
   List<TransactionModel> get _recentTransaction {
-    return transactions.where((trx){
-
+    return transactions.where((trx) {
       // Hanya menghitung list yang waktu di buatnya dari 7 hari yang lalu
       return trx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
     }).toList();
@@ -113,8 +114,13 @@ class _HomeState extends State<Home> {
             transactions.isEmpty
                 ? Column(
                     children: <Widget>[
-                      Text('No Data', style: Theme.of(context).textTheme.title ,),
-                      SizedBox(height: 20,),
+                      Text(
+                        'No Data',
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Container(
                         width: 100,
                         child: Image.asset(
