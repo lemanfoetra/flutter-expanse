@@ -10,6 +10,8 @@ class Chart extends StatelessWidget {
   Chart(this.recentTransaction);
 
   List<Map<String, Object>> get groupedTrxValue {
+
+    
     return List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(Duration(days: index));
 
@@ -18,7 +20,9 @@ class Chart extends StatelessWidget {
         if (recentTransaction[i].date.day == weekDay.day &&
             recentTransaction[i].date.month == weekDay.month &&
             recentTransaction[i].date.year == weekDay.year) {
+          print('ke');
           totalSum += recentTransaction[i].amount;
+
         }
       }
 

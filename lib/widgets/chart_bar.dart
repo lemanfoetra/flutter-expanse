@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ChartBar extends StatelessWidget {
+
+  
   final String label;
   final double spendingAmount;
   final double spendingPctOfTotal;
@@ -9,6 +11,7 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       padding: EdgeInsets.all(10),
       child: Column(

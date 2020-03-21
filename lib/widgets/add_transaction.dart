@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 // di ubah ke statefull karena agar
 class AddTransaction extends StatefulWidget {
@@ -11,18 +12,35 @@ class AddTransaction extends StatefulWidget {
 }
 
 class _AddTransactionState extends State<AddTransaction> {
-  final title = TextEditingController();
 
+
+  final title = TextEditingController();
   final amount = TextEditingController();
+  DateTime _timeSelected;
 
   void onSubmit() {
+
     if (amount.text.isEmpty || double.parse(amount.text) <= 0) {
       return;
     }
     // Dengan widget, kita bisa mengambil properti parrent class ke child class
-    widget.addFunction(title.text, double.parse(amount.text));
+    widget.addFunction(title.text, double.parse(amount.text), _timeSelected);
 
     Navigator.of(context).pop();
+  }
+
+
+  void pilihTanggal() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime(2030),
+    ).then((dateSelected) {
+      setState(() {
+        _timeSelected = dateSelected;
+      });
+    });
   }
 
   @override
@@ -33,24 +51,33 @@ class _AddTransactionState extends State<AddTransaction> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
+
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
               controller: title,
               keyboardType: TextInputType.text,
               onSubmitted: (str) => onSubmit,
             ),
+
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amount,
               keyboardType: TextInputType.number,
             ),
+
             Container(
               padding: EdgeInsets.only(top: 20),
               child: Row(
                 children: <Widget>[
-                  Text('Tidak tanggal dipilih'),
+                  Expanded(
+                    child: Text(_timeSelected != null
+                        ? DateFormat.yMMMd().format(_timeSelected)
+                        : 'No Date Selected'),
+                  ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      pilihTanggal();
+                    },
                     child: Text(
                       'Pilih Tanggal',
                       style: TextStyle(
@@ -61,6 +88,7 @@ class _AddTransactionState extends State<AddTransaction> {
                 ],
               ),
             ),
+            
             RaisedButton(
               onPressed: () => onSubmit(),
               child: Text('Save'),
