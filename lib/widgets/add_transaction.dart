@@ -46,6 +46,7 @@ class _AddTransactionState extends State<AddTransaction> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      
       child: Container(
         padding: EdgeInsets.only(top: 10, right: 20, bottom: 10, left: 10),
         child: Column(
@@ -88,7 +89,7 @@ class _AddTransactionState extends State<AddTransaction> {
                 ],
               ),
             ),
-            
+
             RaisedButton(
               onPressed: () => onSubmit(),
               child: Text('Save'),

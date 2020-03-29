@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
-  final List<TransactionModel> transactions;
 
-  TransactionList({this.transactions});
+
+  final List<TransactionModel> transactions;
+  final Function deleteTrx;
+
+  TransactionList({this.transactions, this.deleteTrx});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 400,
       child: ListView.builder(
         itemCount: transactions.length,
         itemBuilder: (ctx, index) {
@@ -33,7 +36,12 @@ class TransactionList extends StatelessWidget {
                 subtitle: Text(
                   DateFormat.yMMMd().format(transactions[index].date),
                 ),
-                
+                trailing: IconButton(
+                  icon: Icon(Icons.delete, color: Theme.of(context).errorColor,), 
+                  onPressed: (){
+                    return deleteTrx(transactions[index].id);
+                  },
+                ),
               ),
             ),
           );

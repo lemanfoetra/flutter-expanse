@@ -55,18 +55,23 @@ class _HomeState extends State<Home> {
     }).toList();
   }
 
-  void _addTransaction(String titleAdd, double amountAdd, DateTime dateSelected) {
-
-    
+  void _addTransaction(
+      String titleAdd, double amountAdd, DateTime dateSelected) {
     final addTrx = TransactionModel(
-        id: DateTime.now().toString(),
-        title: titleAdd,
-        amount: amountAdd,
-        date: dateSelected,
+      id: DateTime.now().toString(),
+      title: titleAdd,
+      amount: amountAdd,
+      date: dateSelected,
     );
 
     setState(() {
       transactions.add(addTrx);
+    });
+  }
+
+  void _deleteTrx(String id) {
+    setState(() {
+      transactions.removeWhere((trx) => trx.id == id);
     });
   }
 
@@ -114,6 +119,7 @@ class _HomeState extends State<Home> {
               width: double.infinity,
               child: Chart(_recentTransaction),
             ),
+            
             transactions.isEmpty
                 ? Column(
                     children: <Widget>[
@@ -133,13 +139,16 @@ class _HomeState extends State<Home> {
                       ),
                     ],
                   )
-                : TransactionList(transactions: transactions),
+                : TransactionList(
+                    transactions: transactions,
+                    deleteTrx: _deleteTrx,
+                  ),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () { return _addTransaction; },
         child: Icon(Icons.add),
       ),
     );
